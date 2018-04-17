@@ -1,0 +1,243 @@
+body{
+    background: url(../img/sistema/logo.png) no-repeat center top fixed; 
+/*    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+}
+
+.gridAuxDelete{
+    color: red !important;
+}
+
+.gridAuxCheck{
+    color: green !important;
+}
+
+.gridAux{
+    border: 2px solid;
+    margin: 3px;
+}
+
+.newRowGrid{
+    background-color: #C8FBC2;
+}
+
+.deleteRowGrid{
+    background-color: #FF9999;
+}
+
+/*DISEÑO DEL MENU*/
+.x-treelist-navigation .x-treelist-item-tool{
+    cursor: pointer;
+}
+
+.x-treelist-row .x-treelist-item-text{
+    cursor: pointer;
+}
+
+/*MENÚ LATERAL IZQUIERDO*/
+.x-treelist-navigation .x-treelist-item-text{
+    font-weight: normal;
+    font-family: Helvetica;
+    font-size: 14px;
+    text-shadow: 0px 0 #074975, 0 0px #074975, 0px 0 #074975, 0 0px #074975;
+}
+
+.x-panel-bodyWrap{
+    border-radius: 7px;
+}
+
+.x-btn-icon-el-default-toolbar-small{
+    color: #F1F1F1 !important;
+}
+
+.x-btn-inner-default-toolbar-small{
+    color: #F1F1F1 !important;
+}
+
+.x-btn-inner-default-toolbar-small:hover{
+    color: black !important;
+}
+
+.x-box-inner .x-btn-button-default-small{
+    /*background-color: #5ECAC2;*/
+}
+
+/*Estilo de Texto dentro de botones*/
+.x-btn-inner-default-small{
+    color: #F1F1F1 !important;
+    font-weight: bold !important;
+    font-family: Helvetica !important;
+    font-size: 12px !important;
+    margin: 5%;
+}
+
+.x-btn-icon-el-default-small{
+    color: #F1F1F1 !important;
+    margin: 4px;
+}
+.x-btn-default-small{
+    padding: 0px !important;
+    border-radius: 5px;
+}
+/*botones de item selector*/
+.x-form-itemselector-add:before {
+    content: '>';
+}
+.x-form-itemselector-remove:before {
+    content: '<';
+}
+
+/*ESTILOS DE HEADERS EN GRIDS*/
+.x-column-header-inner {
+    background-color: #e5f5f0;
+    color: black;
+    font-weight: normal !important;
+    font-family: Helvetica !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    color: rgba(0, 0, 0, 0.5) !important; 
+    padding: 10px 0px 10px 0px !important;
+}
+
+.x-panel-body-light{
+    border: 0px;
+}
+
+/*ESTILOS EN GRIDS*/
+.x-grid .x-btn-default-toolbar-small{
+    background-color: #5ECAC2 !important;
+}
+
+.x-btn-icon-el-default-toolbar-small{
+    background-color: #5ECAC2;
+}
+
+/*ESTILOS DE PLACEHOLDERS*/
+*::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    background-color: white;
+    font-style: italic !important;
+    /*padding: 0px 5px 0px 5px;*/
+}
+.x-webkit .x-form-text {
+    border: 0px !important;
+    /*padding: 0px 3px 0px 3px !important;*/
+    /*margin: 0px !important;*/
+    font-weight: normal !important;
+    font-family: Helvetica italic !important;
+}
+
+.x-form-trigger-wrap-default{
+    border: 0px;
+}
+
+.x-form-text-default:empty{
+    background-color: white !important;
+    background-image: none !important;
+}
+
+.x-form-text-wrap-default {
+    border-color: #F2F3F4 !important;
+}
+
+.x-form-text-wrap-default.x-form-text-wrap-invalid {
+    border-color: #c30 !important;
+}
+
+.x-form-item-label-text{
+    font-weight: normal !important;
+    font-family: Helvetica !important;
+}
+
+.x-grid-cell-inner {
+    font-weight: normal !important;
+    font-family: Helvetica !important;
+}
+
+
+/*ESTILOS EN GRIDS AUXILIARES*/
+.gridAuxiliar{
+    border: 2px solid;
+    /*margin: 3px;*/
+}
+.gridAuxiliar .x-panel-body-default{
+    padding: 0px;
+}
+
+/*ESTILOS EN LOGIN*/
+.formLogin::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    background-color: white !important;
+}
+
+/*ESTILOS EN BOTONES DE PANEL*/
+
+.btnToolPanel .x-tool-tool-el{
+    background-color: transparent !important;
+}
+
+/*ESTILOS EN BOTONES DE FORMS*/
+.btnFormSubmit{
+    background-color: transparent !important;
+    border: 0px !important;
+    background-image: none !important;
+}
+.btnFormSubmit.x-btn-over{
+    background-color: #CCCCCC !important;
+    border: 0px !important;
+    background-image: none !important;
+}
+.btnFormSubmit span{
+    background-color: transparent !important;
+    color: black !important;
+}
+
+/*ESTILOS EN TITULOS DE PANELES*/
+.x-panel-header-default {
+    font-size: 50px !important;
+    background-color: #5DC2C8 !important;
+    padding: 7px 15px 7px 15px !important;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 15px;
+}
+.x-panel-header-default .x-tool-tool-el {
+    background-color: #5DC2C8 !important;
+}
+.x-panel-header-title-default > .x-title-text-default {
+    font-size: 15px;
+}
+.x-panel-header-default-horizontal.x-header-noborder {
+    padding: 7px 15px 7px 15px !important;
+    border-radius: 10px 10px 0px 0px;
+}
+.x-panel-body-default{
+    border: 0px !important;
+    font-size: 10px !important;
+}
+.x-panel-default-framed {
+    border-color: #F2F3F4 !important;
+}
+.x-toolbar-footer {
+    background-color: white !important;
+}
+.sencha-dash-right-main-container{
+    border-color: #F2F3F4 !important;
+    border-left: 1px;
+    border-bottom: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-style: solid;
+}
+.x-toolbar-footer {
+    padding: 0px;
+}
+.x-grid-cell-inner {
+    padding: 3px 5px 3px !important;
+}
+/*COLOR BOTONES ACTIVAR - DESACTIVAR*/
+span.btnActiveIcon{
+    color: green !important;
+}
+span.btnDesactiveIcon {
+    color: red !important;
+}

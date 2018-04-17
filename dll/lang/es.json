@@ -1,0 +1,57 @@
+{
+    "GENERAL": {
+        "FIELD_REQUIRED": "ESTE CAMPO ES OBLIGATORIO",
+        "EMPTY_GRID": "No existen resultados",
+        "INVALID_FORM": "Por favor complete correctamente el formulario.",
+        "INVALID_IMAGE": "La imagén no tiene un formato válido, se aceptan: JPG, JPEG y PNG.",
+        "REQUIRED_ASTERISK": "<span style='color:red' data-qtip='Obligatorio'>*</span>",
+        "PAGING_EMPTY": "Sin datos que mostrar.",
+        "PAGING_VIEW": "Visualizando {0} - {1} de {2} registros.",
+        "PAGING_BEFORE": "Página",
+        "PAGING_AFTER": "de {0}",
+        "PAGING_FIRST": "Primera página",
+        "PAGING_LAST": "Última página",
+        "PAGING_NEXT": "Siguiente página",
+        "PAGING_PREV": "Página anterior",
+        "PAGING_REFRESH": "Actualizar",
+        "OK_CREATE": "Registro creado con éxito.",
+        "FAIL_CREATE": "UPS! no se pudo crear el registro, intetentelo nuevamente.",
+        "OK_UPDATE": "Registro editado con éxito.",
+        "FAIL_UPDATE": "UPS! no se pudo editar el registro, intetentelo nuevamente.",
+        "OK_DISABLE": "Registro desactivado con éxito.",
+        "FAIL_DISABLE": "UPS! no se pudo desactivar el registro, intetentelo nuevamente.",
+        "OK_ACTIVE": "Registro activado con éxito.",
+        "FAIL_ACTIVE": "UPS! no se pudo activar el registro, intetentelo nuevamente."
+    },
+    "FIELDS": {
+        "FIRST_NAME": "Nombres",
+        "LAST_NAME": "Apellidos",
+        "CI": "Cédula",
+        "SEX": "Sexo",
+        "BORN": "Nacimiento",
+        "EMAIL": "Correo",
+        "TYPE_BLOOD": "Tipo de sangre",
+        "OCCUPATION": "Profesión",
+        "CITY": "Ciudad",
+        "ADDRESS": "Dirección",
+        "AGE": "Edad",
+        "STATE": "Estado",
+        "PERSON": "Persona",
+        "PHONES": "Teléfonos"
+    },
+    "BUTTONS": {
+        "CLEAN": "Limpiar",
+        "DISABLE": "Desactivar",
+        "ENABLE": "Activar",
+        "CREATE": "Guardar",
+        "UPDATE": "Editar",
+        "ADD_PHONE": "Agregar teléfono"
+    },
+    "PERSON_MODULE": {
+        "TITLE_FORM": "Formulario de persona",
+        "TITLE_GRID": "Lista de personas",
+        "TITLE_GRID_PHONES": "Teléfonos",
+        "COLUMN_CITY": "Ciudad",
+        "EMPTY_GRID_PHONES": "Sin teléfonos registrados."
+    }
+}
