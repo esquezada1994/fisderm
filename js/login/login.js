@@ -24,15 +24,15 @@ function login() {
         success: function (response) {
             var data = JSON.parse(response);
             if (data.success === true) {
-                showMessage(data.message, 1);
-                createCookie("PERSONA", data.persona, 1);
+//                showMessage(data.message, 1);
+//                createCookie("PERSONA", data.persona, 1);
                 location.href = 'admin.php';
             } else {
-                showMessage(data.message, 2);
+//                showMessage(data.message, 2);
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            showMessage('ERROR EN LA AUTENTICACIÓN', 2);
+//            showMessage('ERROR EN LA AUTENTICACIÓN', 2);
         }
     });
 }
