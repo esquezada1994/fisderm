@@ -69,4 +69,4 @@ while ($myrow = $result->fetch_assoc()) {
     $data[] = $myrow;
 }
 $mysqli->close();
-echo json_encode(array('success' => true, 'data' => $data, 'length' => count($data)));
+echo json_encode(array('success' => true, 'data' => $data, 'total' => count($data)));

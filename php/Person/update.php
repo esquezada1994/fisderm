@@ -16,7 +16,7 @@ if (isset($data->id)) {
     $sql_update .= (isset($data->ci)) ? "CEDULA = '$data->ci', " : "";
     $sql_update .= (isset($data->idSex)) ? "GENERO = $data->idSex, " : "";
     $sql_update .= (isset($data->fBorn)) ? "FECHA_NACIMIENTO = '$data->fBorn', " : "";
-    $sql_update .= (isset($data->address)) ? "DIRECCION = '$data->address', " : "";
+    $sql_update .= (isset($data->address)) ? "DIRECCION = '" . preg_replace("[\n|\r|\n\r\t|']", "\\n", $data->address) . "', " : "";
     $sql_update .= (isset($data->email)) ? "CORREO = '$data->email', " : "";
     $sql_update .= (isset($data->idTypeBlood)) ? "TIPO_SANGRE = $data->idTypeBlood, " : "";
     $sql_update .= (isset($disable)) ? "DESACTIVADO = $disable, " : "";
@@ -25,7 +25,7 @@ if (isset($data->id)) {
     $sql_update .= 'ID_PERSONA_EDITO =' . $_SESSION["ID_PERSONA"] . ', ';
     $sql_update .= 'FECHA_EDITO = NOW() ';
     $sql_update .= 'WHERE ID_PERSONA = ' . $data->id;
-//    echo json_encode(RUN_SQL($mysqli, $sql_update));
+    $res =  json_encode(RUN_SQL($mysqli, $sql_update));
     if (isset($phones)) {
         $phones = json_decode($phones);
         if (count($phones) > 0) {
@@ -62,7 +62,7 @@ if (isset($data->id)) {
                     . "FECHA_ELIMINO=VALUES(FECHA_ELIMINO);";
             echo json_encode(RUN_SQL($mysqli, $sql_phones));
         } else {
-//            echo json_encode($res);
+            echo json_encode($res);
         }
     }
     $mysqli->close();

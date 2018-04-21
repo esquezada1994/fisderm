@@ -5,9 +5,8 @@ Ext.define('FisDerm.store.person.s_Person', {
     pageSize: 2,
     remoteSort: true,
     proxy: {
-//        type: 'memory',
-        enablePaging: true,
         type: 'ajax',
+        enablePaging: true,
         api: {
             read: 'php/Person/read.php',
             create: 'php/Person/create.php',
@@ -17,7 +16,6 @@ Ext.define('FisDerm.store.person.s_Person', {
         reader: {
             type: 'json',
             rootProperty: 'data',
-            totalProperty: 'length',
             successProperty: 'success'
         }
     },

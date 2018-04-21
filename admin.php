@@ -13,7 +13,6 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <title><?php echo $NOMBRE_APP . ' ' . $VERSION ?></title>
         <link rel="shortcut icon" href="<?php echo $APP_ICONO; ?>" type="image/x-icon" />
         <!--CSS Alertify-->
-        <link href="vendor/alertify/css/alertify.rtl.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
         <link href="vendor/alertify/css/themes/default.rtl.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
         <link href="css/Admin-all.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
         <!--CSS Bootstrap-->
@@ -34,7 +33,6 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!--JS Jquery-->
         <script src="vendor/jquery/jquery.min.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!--JS Alertify-->
-        <script src="vendor/alertify/alertify.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!-- JS APP-->
         <script src="dll/config.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <script src="js/funciones.js?<?php echo $VERSION ?>" type="text/javascript"></script>
@@ -59,21 +57,13 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <script src="vendor/socket.io.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!--JS MAP -->
         <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js'></script>-->
-        <script src="vendor/mapbox/mabox-gl.js" type="text/javascript"></script>
         <script src="vendor/pace-1.0.2/pace.min.js" type="text/javascript"></script>
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet' />
-        <!--<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>-->
-        <script src="vendor/mapbox/turf.min.js" type="text/javascript"></script>
-        <!--<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.0/mapbox-gl-draw.js'></script>-->
-        <script src="vendor/mapbox/mapbox-gl-draw.js" type="text/javascript"></script>
-        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.0/mapbox-gl-draw.css' type='text/css'/>
-        <script src="js/mapBox.js?<?php echo $VERSION ?>" type="text/javascript"></script>
     </head>
     <body>
     <center>
 <!--        <img alt="karview" src="img/loaderModal.gif"/>-->
         <br>
-        <img alt="kparkingsimerweb" src="<?php echo $URL_IMG; ?>/sistema/logo.png" style=""/>
+        <img alt="Sistema FisDerm" src="<?php echo $URL_IMG; ?>/sistema/logo.png" style=""/>
     </center>
 </body>
 </html>
