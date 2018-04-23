@@ -24,6 +24,8 @@ Ext.define('FisDerm.store.person.s_Person', {
             Ext.getStore('store_person').remove(records);
             showMessage(APP_TEXT.GENERAL.FAIL_CREATE, 2);
         } else {
+            cleanModulePerson();
+            Ext.getStore('store_person').load();
             showMessage(APP_TEXT.GENERAL.OK_CREATE, 1);
         }
     },
@@ -39,7 +41,6 @@ Ext.define('FisDerm.store.person.s_Person', {
         write: function (store, operation, eOpts) {
             if ((operation.getRequest().getInitialConfig(['action']) === 'create') ||
                     (operation.getRequest().getInitialConfig(['action']) === 'update')) {
-                cleanModulePerson();
             }
         },
         beforeload: function () {

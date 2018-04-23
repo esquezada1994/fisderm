@@ -1,9 +1,9 @@
 body{
     background: url(../img/sistema/logo.png) no-repeat center top fixed; 
-/*    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
+    /*    -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;*/
 }
 
 .gridAuxDelete{
@@ -58,10 +58,6 @@ body{
 
 .x-btn-inner-default-toolbar-small:hover{
     color: black !important;
-}
-
-.x-box-inner .x-btn-button-default-small{
-    /*background-color: #5ECAC2;*/
 }
 
 /*Estilo de Texto dentro de botones*/
@@ -240,4 +236,20 @@ span.btnActiveIcon{
 }
 span.btnDesactiveIcon {
     color: red !important;
+}
+/*ESTILOS DE BOTONES*/
+.x-form-trigger-default:before {
+    content: "";
+}
+.x-btn-wrap-default-toolbar-small.x-btn-arrow:after {
+    content: "";
+}
+.x-btn-icon-el.x-btn-icon-el-plain-toolbar-small:before{
+    content: "";
+}
+.x-slider-horz .x-slider-thumb:before {
+    content: "";
+}
+.x-form-item-label-default{
+    vertical-align: middle;
 }

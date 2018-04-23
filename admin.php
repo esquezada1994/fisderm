@@ -17,9 +17,11 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <link href="css/Admin-all.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
         <!--CSS Bootstrap-->
         <link href="css/main.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
+        <link href="css/toggleButton.css" rel="stylesheet" type="text/css"/>
         <!--CSS Theme EXT JS LOCAL -->
         <!--<link href="ext/classic/theme-gray/resources/theme-gray-all.css" rel="stylesheet" type="text/css"/>-->
-        <link href="ext/classic/theme-triton/resources/theme-triton-all.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="ext/classic/theme-triton/resources/theme-triton-all.css" rel="stylesheet" type="text/css"/>-->
+        <link href="ext/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet" type="text/css"/>
         <!--CSS Theme EXT JS REMOTE-->
         <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-gray/resources/theme-gray-all.css"/>-->
         <!--CSS Font Awesome LOCAL-->
@@ -42,7 +44,8 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!-- JS EXT LOCAL-->
         <script src="ext/ext-all.js" type="text/javascript"></script>
         <script src="ext/packages/charts/classic/charts.js" type="text/javascript"></script>
-        <script src="ext/classic/theme-triton/theme-triton.js" type="text/javascript"></script>
+        <script src="ext/classic/theme-neptune/theme-neptune.js" type="text/javascript"></script>
+        <!--<script src="ext/classic/theme-triton/theme-triton.js" type="text/javascript"></script>-->
         <!--<script src="ext/classic/theme-gray/theme-gray.js" type="text/javascript"></script>-->
         <script src="ext/packages/ux/classic/ux.js" type="text/javascript"></script>
         <!-- JS EXT REMOTO-->

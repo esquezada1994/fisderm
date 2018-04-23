@@ -19,9 +19,9 @@ if (isset($data->id)) {
     $sql_update .= (isset($data->address)) ? "DIRECCION = '" . preg_replace("[\n|\r|\n\r\t|']", "\\n", $data->address) . "', " : "";
     $sql_update .= (isset($data->email)) ? "CORREO = '$data->email', " : "";
     $sql_update .= (isset($data->idTypeBlood)) ? "TIPO_SANGRE = $data->idTypeBlood, " : "";
-    $sql_update .= (isset($disable)) ? "DESACTIVADO = $disable, " : "";
-    $sql_update .= (isset($disable)) ? "ID_PERSONA_ELIMINO = " . $_SESSION["ID_PERSONA"] . ", " : "";
-    $sql_update .= (isset($disable)) ? "FECHA_ELIMINO = NOW(), " : "";
+    $sql_update .= (isset($data->disable)) ? "DESACTIVADO = $data->disable, " : "";
+    $sql_update .= (isset($data->disable)) ? "ID_PERSONA_ELIMINO = " . $_SESSION["ID_PERSONA"] . ", " : "";
+    $sql_update .= (isset($data->disable)) ? "FECHA_ELIMINO = NOW(), " : "";
     $sql_update .= 'ID_PERSONA_EDITO =' . $_SESSION["ID_PERSONA"] . ', ';
     $sql_update .= 'FECHA_EDITO = NOW() ';
     $sql_update .= 'WHERE ID_PERSONA = ' . $data->id;

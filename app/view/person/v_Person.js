@@ -237,6 +237,17 @@ Ext.define('FisDerm.view.person.v_Person', {
                                         minLength: '3'
                                     }
                                 ]
+                            }, {
+                                xtype: 'togglebutton',
+                                fieldLabel: 'Habilitado',
+                                name: 'disable',
+                                value: 0,
+                                labelWidth: 60,
+                                listeners: {
+                                    changecomplete: function (slider, newValue, thumb, eOpts) {
+                                        // 'do the required action'
+                                    }
+                                }
                             },
                             {
                                 margin: 0,
@@ -352,18 +363,6 @@ Ext.define('FisDerm.view.person.v_Person', {
                                 }
                             },
                             '->',
-                            {
-                                xtype: 'button',
-                                iconCls: 'x-fa fa-power-off btnDesactiveIcon',
-                                cls: 'btnFormSubmit',
-                                tooltip: APP_TEXT.BUTTONS.DISABLE,
-                                text: APP_TEXT.BUTTONS.DISABLE,
-                                width: 80,
-                                disabled: true,
-                                iconAlign: 'top',
-                                name: 'btnDelete',
-                                handler: 'onState'
-                            },
                             {
                                 xtype: 'button',
                                 iconCls: 'x-fa fa-pencil-square-o',

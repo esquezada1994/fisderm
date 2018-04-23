@@ -27,14 +27,6 @@ Ext.define('FisDerm.view.person.c_Person', {
             var formCRUD = modulePerson.down('[name=formCRUD]');
             formCRUD.down('[name=btnCreate]').disable();
             formCRUD.down('[name=btnUpdate]').enable();
-            formCRUD.down('[name=btnDelete]').enable();
-            if (!selected.data.disable) {
-                formCRUD.down('[name=btnDelete]').setText('Activar');
-                formCRUD.down('[name=btnDelete]').setIconCls('x-fa fa-power-off btnActiveIcon');
-            } else {
-                formCRUD.down('[name=btnDelete]').setText('Desactivar');
-                formCRUD.down('[name=btnDelete]').setIconCls('x-fa fa-power-off btnDesactiveIcon');
-            }
             var occupation = formCRUD.down('[name=idOccupation]');
             if (!inStore(occupation.getStore(), selected.data.idOccupation, 'id')) {
                 occupation.getStore().load({
@@ -69,9 +61,6 @@ Ext.define('FisDerm.view.person.c_Person', {
         var formCRUD = modulePerson.down('[name=formCRUD]');
         formCRUD.down('[name=btnCreate]').enable();
         formCRUD.down('[name=btnUpdate]').disable();
-        formCRUD.down('[name=btnDelete]').disable();
-        formCRUD.down('[name=btnDelete]').setText('Desactivar');
-        formCRUD.down('[name=btnDelete]').setIconCls('x-fa fa-power-off btnDesactiveIcon');
         formCRUD.reset();
         var gridPhones = modulePerson.down('[name=gridPhones]');
         gridPhones.getStore().removeAll();
@@ -170,40 +159,14 @@ Ext.define('FisDerm.view.person.c_Person', {
         } else {
             showMessage(APP_TEXT.FIELDS.INVALID_FORM, 2);
         }
-    },
-    onDelete: function () {
-        var form = modulePerson.down('[name=formCRUD]');
-        var data = this.onGetData();
-        Ext.getStore('store_person').proxy.extraParams = data;
-        if (form.isValid()) {
-            if (changeImage) {
-                var formUpload = modulePerson.down('[name=formUpload]');
-                formUpload.submit({
-                    url: 'php/upload.php?ruta=' + URL_IMG_PERSONAS + '&nombre=' + form.getValues().ci,
-                    waitMsg: 'Subiendo imagen...',
-                    success: function (fp, o) {
-                        form.updateRecord(form.activeRecord);
-                        Ext.getStore('store_person').sync();
-                    },
-                    failure: function (fp, o) {
-                        form.down('[name=image]').setSrc(URL_IMG_SISTEMA + 'user.png');
-                        showMessage(o.result.message, 2);
-                    }
-                });
-            } else {
-                form.updateRecord(form.activeRecord);
-                Ext.getStore('store_person').sync();
-            }
-        } else {
-            showMessage(APP_TEXT.FIELDS.INVALID_FORM, 2);
-        }
     }
 });
 
 function cleanModulePerson() {
     var gridRead = modulePerson.down('[name=gridRead]');
-    gridRead.getView().deselect(gridRead.getSelection());
+    var selected = gridRead.getSelection();
+    gridRead.getView().deselect(selected);
     var gridPhones = modulePerson.down('[name=gridPhones]');
     gridPhones.getStore().removeAll();
-    gridRead.getStore().load();
+    return selected;
 }
