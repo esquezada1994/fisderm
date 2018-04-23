@@ -45,13 +45,16 @@
         "ENABLE": "Activar",
         "CREATE": "Crear",
         "UPDATE": "Editar",
-        "ADD_PHONE": "Agregar teléfono"
+        "ADD_PHONE": "Agregar teléfono",
+        "RELOAD": "Recargar",
+        "SEARCH":"BUSCAR"
     },
     "PERSON_MODULE": {
         "TITLE_FORM": "Formulario de persona",
         "TITLE_GRID": "Lista de personas",
         "TITLE_GRID_PHONES": "Teléfonos",
         "COLUMN_CITY": "Ciudad",
-        "EMPTY_GRID_PHONES": "Sin teléfonos registrados."
+        "EMPTY_GRID_PHONES": "Sin teléfonos registrados.",
+        "SEARCH_FIELD": "Nombres, apellidos, cédula, correo..."
     }
 }

@@ -43,11 +43,24 @@ $sql = "SELECT
                 INNER JOIN
             $DB_NAME.profesion pf ON pf.ID_PROFESION = p.ID_PROFESION
                 INNER JOIN
-            $DB_NAME.ciudad c ON c.ID_CIUDAD = p.ID_CIUDAD ";
+            $DB_NAME.ciudad c ON c.ID_CIUDAD = p.ID_CIUDAD 
+        WHERE 
+            TRUE";
 
-if (isset($paises)) {
-    if ($paises !== '') {
-        $sql .= "AND c.idPais IN ($paises) ";
+if (isset($filter)) {
+    if ($filter !== '') {
+        $sql .= " AND ("
+                . " LOWER(p.NOMBRES) LIKE LOWER('%$filter%') "
+                . " OR LOWER(p.APELLIDOS) LIKE LOWER('%$filter%') "
+                . " OR p.CEDULA LIKE '%$filter%' "
+                . " OR LOWER(p.CORREO) LIKE LOWER('%$filter%') "
+                . ")";
+    }
+}
+
+if (isset($city)) {
+    if ($city !== '') {
+        $sql .= " AND p.ID_CIUDAD = $city ";
     }
 }
 

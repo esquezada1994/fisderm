@@ -7,20 +7,28 @@ Ext.define('FisDerm.view.person.c_Person', {
         modulePerson = Ext.getCmp('modulePerson');
         Ext.getStore('store_person').load();
     },
-    onSearch: function () {
-        var paramBusqueda = Ext.getCmp('panelLeerCiudad').down('[name=paramBusquedaCiudad]').getValue();
-        var paises = Ext.getCmp('panelLeerCiudad').down('[name=comboBuscarPais]').getValue();
-        Ext.getStore('store_person').load({
-            params: {
-                param: paramBusqueda,
-                paises: paises.toString()
-            },
-            callback: function (records) {
-                if (records.length <= 0) {
-                    Ext.getStore('store_person').removeAll();
+    onSearch: function (btn, e) {
+        if (btn.xtype === 'button' || e.event.keyCode === 13) {
+            var filterSearch = modulePerson.down('[name=filterSearch]').getValue();
+            var comboCity = modulePerson.down('[name=idComboCity]').getValue();
+            Ext.getStore('store_person').load({
+                params: {
+                    filter: filterSearch,
+                    city: comboCity
+                },
+                callback: function (records) {
+                    if (records.length <= 0) {
+                        Ext.getStore('store_person').removeAll();
+                    }
                 }
-            }
-        });
+            });
+        }
+
+    },
+    onCleanSearch: function () {
+        modulePerson.down('[name=filterSearch]').reset();
+        modulePerson.down('[name=idComboCity]').reset();
+        Ext.getStore('store_person').load();
     },
     onSelectGrid: function (thisObj, selected, eOpts) {
         if (selected) {

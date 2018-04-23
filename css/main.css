@@ -1,9 +1,5 @@
-body{
-    background: url(../img/sistema/logo.png) no-repeat center top fixed; 
-    /*    -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;*/
+body.x-border-layout-ct, div.x-border-layout-ct {
+    background-color: #f2f3f4 !important;
 }
 
 .gridAuxDelete{
@@ -103,11 +99,11 @@ body{
 
 /*ESTILOS EN GRIDS*/
 .x-grid .x-btn-default-toolbar-small{
-    background-color: #5ECAC2 !important;
+    background-color: white !important;
 }
 
 .x-btn-icon-el-default-toolbar-small{
-    background-color: #5ECAC2;
+    background-color: white;
 }
 
 /*ESTILOS DE PLACEHOLDERS*/

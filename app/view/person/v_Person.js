@@ -10,6 +10,9 @@ Ext.define('FisDerm.view.person.v_Person', {
     ],
     id: 'modulePerson',
     bodyBorder: false,
+    defaults: {
+        margin: 3
+    },
     listeners: {
         render: 'onView'
     },
@@ -21,9 +24,9 @@ Ext.define('FisDerm.view.person.v_Person', {
                 name: 'formCRUD',
                 plugins: 'responsive',
                 title: APP_TEXT.PERSON_MODULE.TITLE_FORM,
+                bodyPadding: 10,
                 region: 'west',
                 layout: 'fit',
-                bodyPadding: 10,
                 autoScroll: true,
                 responsiveConfig: {
                     wide: {
@@ -394,6 +397,9 @@ Ext.define('FisDerm.view.person.v_Person', {
                 plugins: 'responsive',
                 region: 'center',
                 layout: 'fit',
+                border: 0,
+                bodyBorder: 0,
+                bodyPadding: 3,
                 responsiveConfig: {
                     wide: {
                         region: 'center',
@@ -405,112 +411,173 @@ Ext.define('FisDerm.view.person.v_Person', {
                         collapseDirection: 'bottom'
                     }
                 },
-                items: {
-                    xtype: 'grid',
-                    name: 'gridRead',
-                    requires: [
-                        'Ext.toolbar.Paging',
-                        'Ext.ux.ProgressBarPager'
-                    ],
-                    frame: true,
-                    store: 'store_person',
-                    plugins: 'gridfilters',
-                    columns: [
-                        {
-                            text: APP_TEXT.FIELDS.CITY,
-                            tooltip: APP_TEXT.FIELDS.CITY,
-                            dataIndex: 'city',
-                            filter: true,
-                            sortable: true,
-                            flex: 1,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.OCCUPATION,
-                            tooltip: APP_TEXT.FIELDS.OCCUPATION,
-                            dataIndex: 'ocuppation',
-                            filter: true,
-                            sortable: true,
-                            flex: 1,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.PERSON,
-                            tooltip: APP_TEXT.FIELDS.PERSON,
-                            dataIndex: 'names',
-                            filter: true,
-                            sortable: true,
-                            flex: 2,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.CI,
-                            tooltip: APP_TEXT.FIELDS.CI,
-                            dataIndex: 'ci',
-                            filter: true,
-                            sortable: true,
-                            width: 75,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.AGE,
-                            tooltip: APP_TEXT.FIELDS.AGE,
-                            dataIndex: 'fBorn',
-                            filter: true,
-                            sortable: true,
-                            width: 55,
-                            renderer: function (date, metaData) {
-                                var nacimiento = moment(date);
-                                var now = moment();
-                                var age = now.diff(nacimiento, "years") + ' años';
-                                metaData.tdAttr = 'data-qtip=\"' + age + '\"';
-                                return age;
+                items: [
+                    {
+
+                        xtype: 'grid',
+                        name: 'gridRead',
+                        requires: [
+                            'Ext.toolbar.Paging',
+                            'Ext.ux.ProgressBarPager'
+                        ],
+                        frame: true,
+                        store: 'store_person',
+                        plugins: 'gridfilters',
+                        tbar: [
+                            {
+                                flex: 3,
+                                xtype: 'textfield',
+                                name: 'filterSearch',
+                                emptyText: APP_TEXT.PERSON_MODULE.SEARCH_FIELD,
+                                listeners: {
+                                    specialkey: 'onSearch'
+                                }
+                            },
+                            {
+                                flex: 1,
+                                xtype: 'combobox',
+                                name: 'idComboCity',
+                                emptyText: APP_TEXT.FIELDS.CITY,
+                                displayField: 'text',
+                                valueField: 'id',
+                                filterPickList: true,
+                                queryParam: 'param',
+                                queryMode: 'remote',
+                                minChars: 0,
+                                store: Ext.create('FisDerm.store.get.s_Cities'),
+                                listeners: {
+                                    specialkey: 'onSearch'
+                                }
+                            },
+                            {
+                                xtype: 'button',
+                                iconCls: 'x-fa fa-search',
+                                cls: 'btnFormSubmit',
+                                tooltip: APP_TEXT.BUTTONS.SEARCH,
+                                iconAlign: 'top',
+                                handler: 'onSearch'
+                            },
+                            {
+                                xtype: 'button',
+                                iconCls: 'x-fa fa-eraser',
+                                cls: 'btnFormSubmit',
+                                tooltip: APP_TEXT.BUTTONS.CLEAN,
+                                iconAlign: 'top',
+                                handler: 'onCleanSearch'
+                            },
+                            {
+                                xtype: 'button',
+                                iconCls: 'x-fa fa-refresh',
+                                cls: 'btnFormSubmit',
+                                tooltip: APP_TEXT.BUTTONS.RELOAD,
+                                iconAlign: 'top',
+                                handler: function () {
+                                    Ext.getStore('store_person').reload();
+                                }
                             }
-                        }, {
-                            text: APP_TEXT.FIELDS.PHONES,
-                            tooltip: APP_TEXT.FIELDS.PHONES,
-                            dataIndex: 'phones',
-                            filter: true,
-                            sortable: true,
-                            flex: 1,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.EMAIL,
-                            tooltip: APP_TEXT.FIELDS.EMAIL,
-                            dataIndex: 'email',
-                            filter: true,
-                            sortable: true,
-                            flex: 2,
-                            renderer: showTipConten
-                        }, {
-                            text: APP_TEXT.FIELDS.STATE,
-                            tooltip: APP_TEXT.FIELDS.STATE,
-                            dataIndex: 'disable',
-                            filter: true,
-                            sortable: true,
-                            width: 40,
-                            renderer: formatDisablePoint
-                        }],
-                    bbar: {
-                        xtype: 'pagingtoolbar',
-                        displayInfo: true,
-                        plugins: 'ux-progressbarpager',
-                        emptyMsg: APP_TEXT.GENERAL.PAGING_EMPTY,
-                        displayMsg: APP_TEXT.GENERAL.PAGING_VIEW,
-                        beforePageText: APP_TEXT.GENERAL.PAGING_BEFORE,
-                        afterPageText: APP_TEXT.GENERAL.PAGING_AFTER,
-                        firstText: APP_TEXT.GENERAL.PAGING_FIRST,
-                        prevText: APP_TEXT.GENERAL.PAGING_PREV,
-                        nextText: APP_TEXT.GENERAL.PAGING_NEXT,
-                        lastText: APP_TEXT.GENERAL.PAGING_LAST,
-                        refreshText: APP_TEXT.GENERAL.PAGING_REFRESH
-                    },
-                    viewConfig: {
-                        emptyText: APP_TEXT.GENERAL.EMPTY_GRID,
-                        enableTextSelection: true,
-                        deferEmptyText: false
-                    },
-                    listeners: {
-                        select: 'onSelectGrid',
-                        deselect: 'onDeselectGrid',
+                        ],
+                        columns: [
+                            {
+                                text: APP_TEXT.FIELDS.CITY,
+                                tooltip: APP_TEXT.FIELDS.CITY,
+                                dataIndex: 'city',
+                                filter: true,
+                                sortable: true,
+                                flex: 1,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.OCCUPATION,
+                                tooltip: APP_TEXT.FIELDS.OCCUPATION,
+                                dataIndex: 'ocuppation',
+                                filter: true,
+                                sortable: true,
+                                flex: 1,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.PERSON,
+                                tooltip: APP_TEXT.FIELDS.PERSON,
+                                dataIndex: 'names',
+                                filter: true,
+                                sortable: true,
+                                flex: 2,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.CI,
+                                tooltip: APP_TEXT.FIELDS.CI,
+                                dataIndex: 'ci',
+                                filter: true,
+                                sortable: true,
+                                width: 75,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.AGE,
+                                tooltip: APP_TEXT.FIELDS.AGE,
+                                dataIndex: 'fBorn',
+                                filter: true,
+                                sortable: true,
+                                width: 55,
+                                renderer: function (date, metaData) {
+                                    var nacimiento = moment(date);
+                                    var now = moment();
+                                    var age = now.diff(nacimiento, "years") + ' años';
+                                    metaData.tdAttr = 'data-qtip=\"' + age + '\"';
+                                    return age;
+                                }
+                            }, {
+                                text: APP_TEXT.FIELDS.PHONES,
+                                tooltip: APP_TEXT.FIELDS.PHONES,
+                                dataIndex: 'phones',
+                                filter: true,
+                                sortable: true,
+                                flex: 1,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.EMAIL,
+                                tooltip: APP_TEXT.FIELDS.EMAIL,
+                                dataIndex: 'email',
+                                filter: true,
+                                sortable: true,
+                                flex: 2,
+                                renderer: showTipConten
+                            }, {
+                                text: APP_TEXT.FIELDS.STATE,
+                                tooltip: APP_TEXT.FIELDS.STATE,
+                                dataIndex: 'disable',
+                                filter: true,
+                                sortable: true,
+                                width: 40,
+                                renderer: formatDisablePoint
+                            }],
+                        bbar: {
+                            xtype: 'pagingtoolbar',
+                            displayInfo: true,
+                            plugins: 'ux-progressbarpager',
+                            emptyMsg: APP_TEXT.GENERAL.PAGING_EMPTY,
+                            displayMsg: APP_TEXT.GENERAL.PAGING_VIEW,
+                            beforePageText: APP_TEXT.GENERAL.PAGING_BEFORE,
+                            afterPageText: APP_TEXT.GENERAL.PAGING_AFTER,
+                            firstText: APP_TEXT.GENERAL.PAGING_FIRST,
+                            prevText: APP_TEXT.GENERAL.PAGING_PREV,
+                            nextText: APP_TEXT.GENERAL.PAGING_NEXT,
+                            lastText: APP_TEXT.GENERAL.PAGING_LAST,
+                            refreshText: APP_TEXT.GENERAL.PAGING_REFRESH,
+                            listeners: {
+                                afterrender: function () {
+                                    this.child('#refresh').hide();
+                                }
+                            }
+                        },
+                        viewConfig: {
+                            emptyText: APP_TEXT.GENERAL.EMPTY_GRID,
+                            enableTextSelection: true,
+                            deferEmptyText: false
+                        },
+                        listeners: {
+                            select: 'onSelectGrid',
+                            deselect: 'onDeselectGrid',
+                        }
                     }
-                }
+                ]
             }
         ];
         this.callParent(arguments);
