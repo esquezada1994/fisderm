@@ -17,12 +17,6 @@ Ext.define('FisDerm.model.person.m_Person', {
         'email',
         {name: 'idTypeBlood', type: 'int'},
         'phones',
-        {name: 'disable', type: 'int'},
-        {name: 'idCreate', type: 'int'},
-        {name: 'fCreate', type: 'date'},
-        {name: 'idUpdate', type: 'int'},
-        {name: 'fUpdate', type: 'date'},
-        {name: 'idDelete', type: 'int'},
-        {name: 'fDelete', type: 'date'}
+        {name: 'disable', type: 'int'}
     ]
 });

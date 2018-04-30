@@ -38,8 +38,28 @@ if (isset($data)) {
             " . (int) $data->disable . ", 
             " . $_SESSION["ID_PERSONA"] . "
     )";
-    echo $sql;
-//    echo json_encode(RUN_SQL($mysqli, $sql_create));
+    $res = json_encode(RUN_SQL($mysqli, $sql_create));
+    if (isset($phones)) {
+        $phones = json_decode($phones);
+        if (count($phones) > 0) {
+            $nuevos = false;
+            $sql_phones = "INSERT INTO $DB_NAME.telefonos  "
+                    . "(ID_TELEFONO, ID_PERSONA, NUMERO, ID_TIPO, DESACTIVADO, ID_PERSONA_CREO) "
+                    . "VALUES ";
+            foreach ($phones as $p) {
+                if ((bool) $p->new) {
+                    $sql_phones .= "(NULL, '" . $res['id'] . "'"
+                            . ", '" . $p->number . "'" . ", " . $p->idType . ""
+                            . ", " . (int) $p->disable . "" . ", " . $_SESSION["ID_PERSONA"] . ""
+                            . "),";
+                }
+            }
+            $sql_phones = substr($sql_phones, 0, -1);
+            echo json_encode(RUN_SQL($mysqli, $sql_phones));
+        } else {
+            echo json_encode($res);
+        }
+    }
     $mysqli->close();
 } else {
     echo json_encode(array('success' => false, 'message' => "FALTAN PARÁMETROS"));

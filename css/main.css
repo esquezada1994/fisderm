@@ -140,23 +140,25 @@ body.x-border-layout-ct, div.x-border-layout-ct {
 .x-form-item-label-text{
     font-weight: normal !important;
     font-family: Helvetica !important;
+    font-size: 11px;
 }
-
+.x-form-item-label-inner{
+    padding: 0px !important;
+    margin: 0px !important;
+}
 .x-grid-cell-inner {
     font-weight: normal !important;
     font-family: Helvetica !important;
 }
 
-
-/*ESTILOS EN GRIDS AUXILIARES*/
-.gridAuxiliar{
-    border: 2px solid;
-    /*margin: 3px;*/
-}
-.gridAuxiliar .x-panel-body-default{
-    padding: 0px;
+/*ESTILOS EN GRIDS EN FORMULARIOS*/
+.gridInForm .x-panel-header{
+    height: 25px;
 }
 
+.gridInForm .x-title-text{
+    font-size: 11px !important;
+}
 /*ESTILOS EN LOGIN*/
 .formLogin::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     background-color: white !important;
@@ -248,4 +250,8 @@ span.btnDesactiveIcon {
 }
 .x-form-item-label-default{
     vertical-align: middle;
+}
+
+.x-form-spinner:before{
+    content: "";
 }

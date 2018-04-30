@@ -8,7 +8,8 @@ Ext.define('FisDerm.view.main.v_Main', {
         'FisDerm.view.main.MainContainerWrap',
         'FisDerm.view.main.MainModel',
         'FisDerm.view.main.ToggleComponent',
-        'FisDerm.view.person.v_Person'
+        'FisDerm.view.person.v_Person',
+        'FisDerm.view.staff.v_Staff'
     ],
     controller: 'main',
     viewModel: 'main',

@@ -104,3 +104,13 @@ function formatPhoneType(value) {
     }
     return value;
 }
+function inArray(array, item, label) {
+    var exist = false;
+    array.forEach(function (record) {
+        if (record[label] === item) {
+            exist = record;
+            return true;
+        }
+    });
+    return exist;
+}

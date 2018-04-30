@@ -43,14 +43,25 @@ Ext.define('FisDerm.view.person.v_Person', {
                         defaults: {
                             width: '100%',
                             defaultType: 'textfield',
-                            margin: '5 0 5 0',
+                            margin: '3 0 5 0',
                             defaults: {
+                                defaultType: 'textfield',
                                 flex: 1,
                                 labelWidth: 63,
+                                labelAlign: 'top',
                                 allowBlank: false,
                                 allowOnlyWhitespace: false,
                                 blankText: APP_TEXT.GENERAL.FIELD_REQUIRED,
-                                afterLabelTextTpl: APP_TEXT.GENERAL.REQUIRED_ASTERISK
+                                afterLabelTextTpl: APP_TEXT.GENERAL.REQUIRED_ASTERISK,
+                                defaults: {
+                                    flex: 1,
+                                    labelWidth: 63,
+                                    labelAlign: 'top',
+                                    allowBlank: false,
+                                    allowOnlyWhitespace: false,
+                                    blankText: APP_TEXT.GENERAL.FIELD_REQUIRED,
+                                    afterLabelTextTpl: APP_TEXT.GENERAL.REQUIRED_ASTERISK
+                                }
                             }
                         },
                         flex: 1,
@@ -59,78 +70,84 @@ Ext.define('FisDerm.view.person.v_Person', {
                         border: 0,
                         items: [
                             {
-                                xtype: 'form',
-                                style: 'text-align:center;',
-                                name: 'formUpload',
-                                border: 0,
-                                height: 120,
-                                items: [
-                                    {
-                                        xtype: 'image', src: URL_IMG_SISTEMA + 'user.png', name: 'imagePerson', height: 100, width: 100, style: 'text-align:center; border-radius: 50%; border: solid; border-color: #5ecac2;background-size: auto 100%;background-position: center;', listeners: {render: function (me) {
-                                                me.el.on({error: function (e, t, eOmpts) {
-                                                        me.setSrc(URL_IMG_SISTEMA + 'user.png');
-                                                    }});
-                                            }}
-                                    },
-                                    {
-                                        style: 'position: fixed; top: 85px;',
-                                        xtype: 'filefield',
-                                        allowOnlyWhitespace: true,
-                                        buttonOnly: true,
-                                        iconCls: 'x-fa fa-camera',
-                                        name: 'image',
-                                        msgTarget: 'side',
-                                        allowBlank: true,
-                                        width: '100%',
-                                        anchor: '100%',
-                                        buttonConfig: {
-                                            text: '',
-                                            iconCls: 'x-fa fa-camera'
-                                        },
-                                        listeners: {
-                                            afterrender: function (cmp) {
-                                                cmp.fileInputEl.set({
-                                                    accept: '.png, .jpg, .jpeg'
-                                                });
-                                            },
-                                            change: function (evt, fileName) {
-                                                var extension = fileName.split('.').pop();
-                                                if (extension.toLowerCase() === 'png' || extension.toLowerCase() === 'jpg' || extension.toLowerCase() === 'jpeg') {
-                                                    changeImage = true;
-                                                    var formPersona = modulePerson.down('[name=formCRUD]');
-                                                    var fieldImage = formPersona.down('[name=imagePerson]');
-                                                    if (evt.fileInputEl.dom.files && evt.fileInputEl.dom.files) {
-                                                        var reader = new FileReader();
-                                                        reader.onload = function (e) {
-                                                            fieldImage.setSrc(e.target.result);
-                                                        };
-                                                        reader.readAsDataURL(evt.fileInputEl.dom.files[0]);
-                                                    }
-                                                } else {
-                                                    showMessage(APP_TEXT.GENERAL.INVALID_IMAGE, 2);
-                                                }
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
                                 xtype: 'container',
                                 layout: 'hbox',
                                 items: [
                                     {
-                                        fieldLabel: APP_TEXT.FIELDS.FIRST_NAME,
-                                        name: 'firstName',
-                                        emptyText: APP_TEXT.FIELDS.FIRST_NAME,
-                                        maxLength: '125',
-                                        minLength: '4'
-                                    }, {
-                                        margin: '0 0 0 5',
-                                        fieldLabel: APP_TEXT.FIELDS.LAST_NAME,
-                                        name: 'lastName',
-                                        emptyText: APP_TEXT.FIELDS.LAST_NAME,
-                                        maxLength: '125',
-                                        minLength: '4'
+                                        xtype: 'container',
+                                        layout: 'vbox',
+                                        width: '100%',
+                                        items: [
+                                            {
+                                                fieldLabel: APP_TEXT.FIELDS.FIRST_NAME,
+                                                name: 'firstName',
+                                                emptyText: APP_TEXT.FIELDS.FIRST_NAME,
+                                                maxLength: '125',
+                                                minLength: '4'
+                                            }, {
+                                                fieldLabel: APP_TEXT.FIELDS.LAST_NAME,
+                                                name: 'lastName',
+                                                emptyText: APP_TEXT.FIELDS.LAST_NAME,
+                                                maxLength: '125',
+                                                minLength: '4'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'form',
+                                        style: 'text-align:center;',
+                                        name: 'formUpload',
+                                        border: 0,
+                                        height: 90,
+                                        items: [
+                                            {
+                                                xtype: 'image', src: URL_IMG_SISTEMA + 'user.png', name: 'imagePerson', height: 85, width: 85, style: 'text-align:center; border-radius: 50%; border: solid; border-color: #5ecac2;background-size: auto 100%;background-position: center;', listeners: {render: function (me) {
+                                                        me.el.on({error: function (e, t, eOmpts) {
+                                                                me.setSrc(URL_IMG_SISTEMA + 'user.png');
+                                                            }});
+                                                    }}
+                                            },
+                                            {
+                                                style: 'position: fixed; top: 67px; z-index:100;',
+                                                xtype: 'filefield',
+                                                allowOnlyWhitespace: true,
+                                                buttonOnly: true,
+                                                iconCls: 'x-fa fa-camera',
+                                                name: 'image',
+                                                msgTarget: 'side',
+                                                allowBlank: true,
+                                                width: '100%',
+                                                anchor: '100%',
+                                                buttonConfig: {
+                                                    text: '',
+                                                    iconCls: 'x-fa fa-camera'
+                                                },
+                                                listeners: {
+                                                    afterrender: function (cmp) {
+                                                        cmp.fileInputEl.set({
+                                                            accept: '.png, .jpg, .jpeg'
+                                                        });
+                                                    },
+                                                    change: function (evt, fileName) {
+                                                        var extension = fileName.split('.').pop();
+                                                        if (extension.toLowerCase() === 'png' || extension.toLowerCase() === 'jpg' || extension.toLowerCase() === 'jpeg') {
+                                                            changeImage = true;
+                                                            var formPersona = modulePerson.down('[name=formCRUD]');
+                                                            var fieldImage = formPersona.down('[name=imagePerson]');
+                                                            if (evt.fileInputEl.dom.files && evt.fileInputEl.dom.files) {
+                                                                var reader = new FileReader();
+                                                                reader.onload = function (e) {
+                                                                    fieldImage.setSrc(e.target.result);
+                                                                };
+                                                                reader.readAsDataURL(evt.fileInputEl.dom.files[0]);
+                                                            }
+                                                        } else {
+                                                            showMessage(APP_TEXT.GENERAL.INVALID_IMAGE, 2);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -245,12 +262,7 @@ Ext.define('FisDerm.view.person.v_Person', {
                                 fieldLabel: 'Habilitado',
                                 name: 'disable',
                                 value: 0,
-                                labelWidth: 60,
-                                listeners: {
-                                    changecomplete: function (slider, newValue, thumb, eOpts) {
-                                        // 'do the required action'
-                                    }
-                                }
+                                labelWidth: 60
                             },
                             {
                                 margin: 0,

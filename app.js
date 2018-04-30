@@ -10,7 +10,8 @@ Ext.application({
     ],
     stores: [
         's_Menu',
-        'person.s_Person'
+        'person.s_Person',
+        'staff.s_Staff'
     ],
     mainView: 'FisDerm.view.main.v_Main',
     launch: function () {

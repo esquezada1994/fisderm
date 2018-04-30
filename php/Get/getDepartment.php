@@ -9,18 +9,24 @@ if (!$mysqli = getConectionDb())
 extract($_GET);
 
 $sql = "SELECT 
-            ID_CIUDAD as id,
-            ID_PAIS as idCountry,
-            CIUDAD as text,
-            COLOR as color
+            ID_DEPARTAMENTO as id,
+            DEPARTAMENTO as text,
+            DESCRIPCION as description
         FROM
-            $DB_NAME.ciudad
+            $DB_NAME.departamento
         WHERE
-            TRUE ";
+            DESACTIVADO = 0 ";
 
 if (isset($param)) {
-    $sql .= "AND (LOWER(CIUDAD) LIKE LOWER('%$param%') "
-            . "OR ID_CIUDAD = '$param') ";
+    $sql .= "AND ("
+            . "LOWER(DEPARTAMENTO) LIKE LOWER('%$param%') "
+            . "OR LOWER(DESCRIPCION) LIKE LOWER('%$param%') "
+            . "OR ID_DEPARTAMENTO = '$param'"
+            . ") ";
+}
+
+if (isset($required)) {
+    $sql .= "AND ID_DEPARTAMENTO IN ($required) ";
 }
 
 if (isset($limite)) {

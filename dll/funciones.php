@@ -3,7 +3,7 @@
 function RUN_SQL($mysqli, $sql) {
     $stmt = $mysqli->prepare($sql);
     if (!$stmt) {
-        return array('success' => false, 'text' => "ERROR EN LA CONSULTA");
+        return array('success' => false, 'text' => "ERROR EN LA CONSULTA", 'sql' => $sql);
     }
     $stmt->execute();
     if ($stmt->affected_rows > 0) {

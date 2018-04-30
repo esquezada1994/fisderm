@@ -1,16 +1,16 @@
-Ext.define('FisDerm.store.person.s_Person', {
+Ext.define('FisDerm.store.staff.s_Staff', {
     extend: 'Ext.data.Store',
-    model: 'FisDerm.model.person.m_Person',
-    storeId: 'store_person',
+    model: 'FisDerm.model.staff.m_Staff',
+    storeId: 'store_staff',
     pageSize: 2,
     remoteSort: true,
     proxy: {
         type: 'ajax',
         enablePaging: true,
         api: {
-            read: 'php/Person/read.php',
-            create: 'php/Person/create.php',
-            update: 'php/Person/update.php'
+            read: 'php/Staff/read.php',
+            create: 'php/Staff/create.php',
+            update: 'php/Staff/update.php'
         },
         reader: {
             type: 'json',
@@ -20,17 +20,17 @@ Ext.define('FisDerm.store.person.s_Person', {
     },
     onCreateRecords: function (records, operation, success) {
         if (!success) {
-            Ext.getStore('store_person').remove(records);
+            Ext.getStore('store_staff').remove(records);
             showMessage(APP_TEXT.GENERAL.FAIL_CREATE, 2);
         } else {
-            cleanModulePerson();
-            Ext.getStore('store_person').load();
+            cleanModuleStaff();
+            Ext.getStore('store_staff').load();
             showMessage(APP_TEXT.GENERAL.OK_CREATE, 1);
         }
     },
     onUpdateRecords: function (records, operation, success) {
         if (!success) {
-            Ext.getStore('store_person').rejectChanges()
+            Ext.getStore('store_staff').rejectChanges()
             showMessage(APP_TEXT.GENERAL.FAIL_UPDATE, 2);
         } else {
             showMessage(APP_TEXT.GENERAL.OK_UPDATE, 1);
@@ -38,7 +38,7 @@ Ext.define('FisDerm.store.person.s_Person', {
     },
     listeners: {
         beforeload: function () {
-            var gridRead = modulePerson.down('[name=gridRead]');
+            var gridRead = moduleStaff.down('[name=gridRead]');
             gridRead.getView().deselect(gridRead.getSelection());
         }
     }

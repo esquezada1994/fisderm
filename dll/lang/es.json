@@ -37,7 +37,15 @@
         "AGE": "Edad",
         "STATE": "Estado",
         "PERSON": "Persona",
-        "PHONES": "Teléfonos"
+        "PHONES": "Teléfonos",
+        "USER": "Usuario",
+        "PASS": "Contraseña",
+        "ROLE": "Rol",
+        "SCHEDULE": "Horario",
+        "TYPE_SALARY": "Tipo de salario",
+        "SALARY": "Salario",
+        "DEPARTMENT": "Departamento",
+        "SALARY": "Salario"
     },
     "BUTTONS": {
         "CLEAN": "Limpiar",
@@ -53,8 +61,12 @@
         "TITLE_FORM": "Formulario de persona",
         "TITLE_GRID": "Lista de personas",
         "TITLE_GRID_PHONES": "Teléfonos",
-        "COLUMN_CITY": "Ciudad",
         "EMPTY_GRID_PHONES": "Sin teléfonos registrados.",
         "SEARCH_FIELD": "Nombres, apellidos, cédula, correo..."
+    },
+    "STAFF_MODULE": {
+        "TITLE_FORM": "Formulario de usuario",
+        "TITLE_GRID": "Lista de usuarios",
+        "SEARCH_FIELD": "Nombres, apellidos, cédula, correo, usuario..."
     }
 }

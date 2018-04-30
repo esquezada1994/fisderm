@@ -9,18 +9,22 @@ if (!$mysqli = getConectionDb())
 extract($_GET);
 
 $sql = "SELECT 
-            ID_CIUDAD as id,
-            ID_PAIS as idCountry,
-            CIUDAD as text,
-            COLOR as color
+            ID_HORARIO as id,
+            HORARIO as text
         FROM
-            $DB_NAME.ciudad
+            $DB_NAME.horario
         WHERE
             TRUE ";
 
 if (isset($param)) {
-    $sql .= "AND (LOWER(CIUDAD) LIKE LOWER('%$param%') "
-            . "OR ID_CIUDAD = '$param') ";
+    $sql .= "AND ("
+            . "LOWER(HORARIO) LIKE LOWER('%$param%') "
+            . "OR ID_HORARIO = '$param'"
+            . ") ";
+}
+
+if (isset($required)) {
+    $sql .= "AND ID_HORARIO IN ($required) ";
 }
 
 if (isset($limite)) {

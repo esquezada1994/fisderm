@@ -9,18 +9,18 @@ if (!$mysqli = getConectionDb())
 extract($_GET);
 
 $sql = "SELECT 
-            ID_CIUDAD as id,
-            ID_PAIS as idCountry,
-            CIUDAD as text,
-            COLOR as color
+            ID_TIPO_SUELDO as id,
+            TIPO_SUELDO as text
         FROM
-            $DB_NAME.ciudad
+            $DB_NAME.tipo_sueldo
         WHERE
-            TRUE ";
+            DESACTIVADO = 0 ";
 
 if (isset($param)) {
-    $sql .= "AND (LOWER(CIUDAD) LIKE LOWER('%$param%') "
-            . "OR ID_CIUDAD = '$param') ";
+    $sql .= " AND ("
+            . "LOWER(TIPO_SUELDO) LIKE LOWER('%$param%') "
+            . "OR ID_TIPO_SUELDO = '$param' "
+            . ") ";
 }
 
 if (isset($limite)) {

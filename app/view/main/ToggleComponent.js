@@ -1,17 +1,17 @@
 Ext.define('FisDerm.view.main.ToggleComponent', {   
     extend: 'Ext.slider.Single',
-       alias: 'widget.togglebutton',
-       config: {
+    alias: 'widget.togglebutton',
+    config: {
         defaultBindProperty: 'value'   
     },
-       cls: 'toggleoff',
-       width: 5,
-       animate: false,
-       maxValue: 1,
-       initComponent: function () {
+    cls: 'toggleoff',
+    width: 5,
+    animate: false,
+    maxValue: 1,
+    initComponent: function () {
         this.callParent();   
     },
-      getValue: function () {       
+    getValue: function () {       
         var toggleValue = this.thumbs[0].value;       
         if (toggleValue === 1) {
             this.removeCls('toggleoff');
