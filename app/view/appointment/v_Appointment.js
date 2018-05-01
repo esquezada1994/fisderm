@@ -51,6 +51,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                             afterLabelTextTpl: APP_TEXT.GENERAL.REQUIRED_ASTERISK,
                             defaults: {
                                 flex: 1,
+                                margin: '5 0 5 0',
                                 labelAlign: 'top',
                                 allowBlank: false,
                                 allowOnlyWhitespace: false,
@@ -64,27 +65,32 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                         border: 0,
                         items: [
                             {
-                                fieldLabel: APP_TEXT.FIELDS.ROLE,
-                                emptyText: APP_TEXT.FIELDS.ROLE,
-                                name: 'idRoles',
-                                xtype: 'tagfield',
+                                fieldLabel: APP_TEXT.FIELDS.TYPE_APPOINTMENT,
+                                emptyText: APP_TEXT.FIELDS.TYPE_APPOINTMENT,
+                                name: 'idTypeAppointment',
+                                xtype: 'combobox',
                                 displayField: 'text',
                                 valueField: 'id',
                                 filterPickList: true,
-                                allowOnlyWhitespace: true,
                                 queryParam: 'param',
                                 queryMode: 'remote',
-                                growMax: 30,
-                                store: Ext.create('FisDerm.store.get.s_Roles'),
-                                minChars: 0,
-                                listeners: {
-                                    beforeselect: 'onActionTagRole',
-                                    beforedeselect: 'onActionTagRole'
-                                }
-                            },
-                            {
-                                fieldLabel: APP_TEXT.FIELDS.PERSON,
-                                emptyText: APP_TEXT.FIELDS.PERSON,
+                                store: Ext.create('FisDerm.store.get.s_Appointment_Type'),
+                                minChars: 0
+                            }, {
+                                fieldLabel: APP_TEXT.APPOINTMENT_MODULE.LABEL_MEDIC_PHYSICIAN,
+                                emptyText: APP_TEXT.APPOINTMENT_MODULE.LABEL_MEDIC_PHYSICIAN,
+                                name: 'idStaff',
+                                xtype: 'combobox',
+                                displayField: 'text',
+                                valueField: 'id',
+                                filterPickList: true,
+                                queryParam: 'param',
+                                queryMode: 'remote',
+                                store: Ext.create('FisDerm.store.get.s_Medics'),
+                                minChars: 0
+                            }, {
+                                fieldLabel: APP_TEXT.FIELDS.PATIENT,
+                                emptyText: APP_TEXT.FIELDS.PATIENT,
                                 name: 'idPerson',
                                 xtype: 'combobox',
                                 displayField: 'text',
@@ -93,48 +99,34 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 queryParam: 'param',
                                 queryMode: 'remote',
                                 store: Ext.create('FisDerm.store.get.s_Person'),
-                                minChars: 0,
-                                listeners: {
-                                    beforequery: function (queryEvent, eOpts) {
-                                        queryEvent.combo.store.proxy.extraParams = {required: true};
-                                    }
-                                }
-                            }, {
-                                fieldLabel: APP_TEXT.FIELDS.DEPARTMENT,
-                                emptyText: APP_TEXT.FIELDS.DEPARTMENT,
-                                name: 'idDepartment',
-                                xtype: 'combobox',
-                                displayField: 'text',
-                                valueField: 'id',
-                                filterPickList: true,
-                                queryParam: 'param',
-                                queryMode: 'remote',
-                                store: Ext.create('FisDerm.store.get.s_Department'),
                                 minChars: 0
                             },
                             {
+                                margin: 0,
                                 xtype: 'container',
                                 layout: 'hbox',
                                 items: [
                                     {
-                                        fieldLabel: APP_TEXT.FIELDS.USER,
-                                        emptyText: APP_TEXT.FIELDS.USER,
-                                        name: 'user',
-                                        minLength: '3',
-                                        maxLength: '50',
-                                        maskRe: new RegExp("^[a-zA-Z1-9_]+$"),
-                                        listeners: {
-                                            change: function (thisObj, e, eOpts) {
-                                                thisObj.setValue(e.toLowerCase());
-                                            }
-                                        }
+                                        fieldLabel: APP_TEXT.FIELDS.DATE_APPOINTMENT,
+                                        emptyText: APP_TEXT.FIELDS.DATE_APPOINTMENT,
+                                        maskRe: /[0-9./-]/,
+                                        name: 'dateAppointment',
+                                        maxLength: '10',
+                                        minLength: '10',
+                                        xtype: 'datefield',
+                                        value: new Date(),
+                                        format: 'd/m/Y',
+                                        submitFormat: 'Y-m-d',
+                                        submitValue: true
                                     }, {
-                                        margin: '0 0 0 5',
-                                        fieldLabel: APP_TEXT.FIELDS.PASS,
-                                        emptyText: APP_TEXT.FIELDS.PASS,
-                                        inputType: 'password',
-                                        name: 'pass',
-                                        minLength: '6'
+                                        fieldLabel: APP_TEXT.FIELDS.TIME_APPOINTMENT,
+                                        emptyText: APP_TEXT.FIELDS.TIME_APPOINTMENT,
+                                        xtype: 'timefield',
+                                        allowDecimal: true,
+                                        margin: '5 0 0 5',
+                                        name: 'timeAppointment',
+                                        maxValue: '22:00',
+                                        minValue: '07:00'
                                     }
                                 ]
                             },
@@ -144,47 +136,24 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 layout: 'hbox',
                                 items: [
                                     {
-                                        xtype: 'combobox',
-                                        fieldLabel: APP_TEXT.FIELDS.TYPE_SALARY,
-                                        name: 'idTypeSalary',
-                                        emptyText: APP_TEXT.FIELDS.TYPE_SALARY,
-                                        displayField: 'text',
-                                        valueField: 'id',
-                                        filterPickList: true,
-                                        queryParam: 'param',
-                                        queryMode: 'remote',
-                                        minChars: 0,
-                                        store: Ext.create('FisDerm.store.get.s_Salary_Type')
-                                    }, {
+                                        fieldLabel: APP_TEXT.FIELDS.COST,
+                                        emptyText: APP_TEXT.FIELDS.COST,
                                         xtype: 'numberfield',
                                         allowDecimal: true,
-                                        margin: '0 0 0 5',
-                                        fieldLabel: APP_TEXT.FIELDS.SALARY,
-                                        name: 'salary',
-                                        emptyText: APP_TEXT.FIELDS.SALARY,
+                                        name: 'cost',
+                                        maxValue: 10000,
+                                        minValue: 0
+                                    }, {
+                                        fieldLabel: APP_TEXT.FIELDS.DISCOUNT,
+                                        emptyText: APP_TEXT.FIELDS.DISCOUNT,
+                                        xtype: 'numberfield',
+                                        allowDecimal: true,
+                                        margin: '5 0 0 5',
+                                        name: 'discount',
                                         maxValue: 10000,
                                         minValue: 0
                                     }
                                 ]
-                            },
-                            {
-                                fieldLabel: APP_TEXT.FIELDS.SCHEDULE,
-                                emptyText: APP_TEXT.FIELDS.SCHEDULE,
-                                name: 'idSchedules',
-                                xtype: 'tagfield',
-                                displayField: 'text',
-                                valueField: 'id',
-                                filterPickList: true,
-                                allowOnlyWhitespace: true,
-                                queryParam: 'param',
-                                queryMode: 'remote',
-                                growMax: 50,
-                                store: Ext.create('FisDerm.store.get.s_Schedules'),
-                                minChars: 0,
-                                listeners: {
-                                    beforeselect: 'onActionTagSchedules',
-                                    beforedeselect: 'onActionTagSchedules'
-                                }
                             }, {
                                 xtype: 'togglebutton',
                                 fieldLabel: 'Habilitado',
@@ -253,16 +222,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                 },
                 items: [
                     {
-
-                        xtype: 'grid',
-                        name: 'gridRead',
-                        requires: [
-                            'Ext.toolbar.Paging',
-                            'Ext.ux.ProgressBarPager'
-                        ],
-                        frame: true,
-                        store: 'store_appointment',
-                        plugins: 'gridfilters',
+                        xtype: 'panel',
                         tbar: [
                             {
                                 flex: 3,
@@ -316,76 +276,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 }
                             }
                         ],
-                        columns: [
-                            {
-                                text: APP_TEXT.FIELDS.PERSON,
-                                tooltip: APP_TEXT.FIELDS.PERSON,
-                                dataIndex: 'names',
-                                filter: true,
-                                sortable: true,
-                                flex: 2,
-                                renderer: showTipConten
-                            }, {
-                                text: APP_TEXT.FIELDS.USER,
-                                tooltip: APP_TEXT.FIELDS.USER,
-                                dataIndex: 'user',
-                                filter: true,
-                                sortable: true,
-                                flex: 1,
-                                renderer: showTipConten
-                            }, {
-                                text: APP_TEXT.FIELDS.ROLE,
-                                tooltip: APP_TEXT.FIELDS.ROLE,
-                                dataIndex: 'roles',
-                                filter: true,
-                                sortable: true,
-                                flex: 2,
-                                renderer: showTipConten
-                            }, {
-                                text: APP_TEXT.FIELDS.DEPARTMENT,
-                                tooltip: APP_TEXT.FIELDS.DEPARTMENT,
-                                dataIndex: 'department',
-                                filter: true,
-                                sortable: true,
-                                flex: 1,
-                                renderer: showTipConten
-                            }, {
-                                text: APP_TEXT.FIELDS.STATE,
-                                tooltip: APP_TEXT.FIELDS.STATE,
-                                dataIndex: 'disable',
-                                filter: true,
-                                sortable: true,
-                                width: 40,
-                                renderer: formatDisablePoint
-                            }],
-                        bbar: {
-                            xtype: 'pagingtoolbar',
-                            displayInfo: true,
-                            plugins: 'ux-progressbarpager',
-                            emptyMsg: APP_TEXT.GENERAL.PAGING_EMPTY,
-                            displayMsg: APP_TEXT.GENERAL.PAGING_VIEW,
-                            beforePageText: APP_TEXT.GENERAL.PAGING_BEFORE,
-                            afterPageText: APP_TEXT.GENERAL.PAGING_AFTER,
-                            firstText: APP_TEXT.GENERAL.PAGING_FIRST,
-                            prevText: APP_TEXT.GENERAL.PAGING_PREV,
-                            nextText: APP_TEXT.GENERAL.PAGING_NEXT,
-                            lastText: APP_TEXT.GENERAL.PAGING_LAST,
-                            refreshText: APP_TEXT.GENERAL.PAGING_REFRESH,
-                            listeners: {
-                                afterrender: function () {
-                                    this.child('#refresh').hide();
-                                }
-                            }
-                        },
-                        viewConfig: {
-                            emptyText: APP_TEXT.GENERAL.EMPTY_GRID,
-                            enableTextSelection: true,
-                            deferEmptyText: false
-                        },
-                        listeners: {
-                            select: 'onSelectGrid',
-                            deselect: 'onDeselectGrid',
-                        }
+                        html: '<div id="calendar"></div>'
                     }
                 ]
             }

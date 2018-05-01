@@ -38,8 +38,6 @@ Ext.define('FisDerm.store.appointment.s_Appointment', {
     },
     listeners: {
         beforeload: function () {
-            var gridRead = moduleAppointment.down('[name=gridRead]');
-            gridRead.getView().deselect(gridRead.getSelection());
         }
     }
 });

@@ -6,6 +6,9 @@ Ext.define('FisDerm.view.appointment.c_Appointment', {
         validateAccess(module);
         moduleAppointment = Ext.getCmp('moduleAppointment');
         Ext.getStore('store_appointment').load();
+        $('#calendar').fullCalendar({
+        
+        });
     },
     onSearch: function (btn, e) {
         if (btn.xtype === 'button' || e.event.keyCode === 13) {

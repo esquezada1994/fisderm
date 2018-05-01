@@ -24,17 +24,24 @@
         "FAIL_ACTIVE": "UPS! no se pudo activar el registro, intetentelo nuevamente."
     },
     "FIELDS": {
+        "APPOINTMENT": "Cita",
         "ADDRESS": "Dirección",
         "AGE": "Edad",
         "BORN": "Nacimiento",
         "CI": "Cédula",
         "CITY": "Ciudad",
+        "DATE_APPOINTMENT": "Fecha de cita",
+        "COST": "Costo",
+        "DISCOUNT": "Descuento",
+        "TIME_APPOINTMENT": "Tiempo de cita",
         "DEPARTMENT": "Departamento",
         "EMAIL": "Correo",
         "FIRST_NAME": "Nombres",
         "LAST_NAME": "Apellidos",
+        "MEDIC": "Médico",
         "OCCUPATION": "Profesión",
         "PASS": "Contraseña",
+        "PATIENT": "Paciente",
         "PERSON": "Persona",
         "PHONES": "Teléfonos",
         "ROLE": "Rol",
@@ -44,6 +51,7 @@
         "SEX": "Sexo",
         "TYPE_SALARY": "Tipo de salario",
         "TYPE_BLOOD": "Tipo de sangre",
+        "TYPE_APPOINTMENT": "Tipo de cita",
         "USER": "Usuario"
     },
     "BUTTONS": {
@@ -71,6 +79,7 @@
     "APPOINTMENT_MODULE": {
         "TITLE_FORM": "Formulario de citas",
         "TITLE_GRID": "Lista de citas",
+        "LABEL_MEDIC_PHYSICIAN": "Médico o tratante",
         "SEARCH_FIELD_PATIENT": "Paciente...",
         "SEARCH_FIELD_MEDIC": "Médico..."
     }

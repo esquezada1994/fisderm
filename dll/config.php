@@ -1,5 +1,5 @@
 <?php
-$VERSION = "0.0.4";
+$VERSION = "0.0.5";
 $URL_IMG = "img/";
 $AMBIENTE = 0; 
 $LIMITE_REGISTROS = 50;

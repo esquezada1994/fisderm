@@ -18,12 +18,8 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!--CSS Bootstrap-->
         <link href="css/main.css?<?php echo $VERSION ?>" rel="stylesheet" type="text/css"/>
         <link href="css/toggleButton.css" rel="stylesheet" type="text/css"/>
-        <!--CSS Theme EXT JS LOCAL -->
-        <!--<link href="ext/classic/theme-gray/resources/theme-gray-all.css" rel="stylesheet" type="text/css"/>-->
-        <!--<link href="ext/classic/theme-triton/resources/theme-triton-all.css" rel="stylesheet" type="text/css"/>-->
-        <link href="ext/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet" type="text/css"/>
+        <!--CSS Theme EXT JS LOCAL --><link href="ext/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet" type="text/css"/>
         <!--CSS Theme EXT JS REMOTE-->
-        <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-gray/resources/theme-gray-all.css"/>-->
         <!--CSS Font Awesome LOCAL-->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <!--CSS Font Awesome REMOTE-->
@@ -31,7 +27,8 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!--CSS Charts-->
         <link href="ext/packages/charts/classic/classic/resources/charts-all.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/pace-1.0.2/pace-theme-flash.tmpl.css" rel="stylesheet" type="text/css"/>
-
+        <!--CSS Calendar-->
+        <link href="vendor/fullcalendar-3.9.0/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
         <!--JS Jquery-->
         <script src="vendor/jquery/jquery.min.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!--JS Alertify-->
@@ -54,8 +51,9 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/charts/classic/charts.js"></script>-->
         <!-- JS APP-->
         <script src="app.js?<?php echo $VERSION ?>" type="text/javascript"></script>
-        <!-- JS MOMENT-->
-        <script src="vendor/moment.js?<?php echo $VERSION ?>" type="text/javascript"></script>
+        <!-- JS CALENDAR-->
+        <script src="vendor/fullcalendar-3.9.0/lib/moment.min.js" type="text/javascript"></script>
+        <script src="vendor/fullcalendar-3.9.0/fullcalendar.min.js" type="text/javascript"></script>
         <!-- JS SOCKET -->
         <script src="vendor/socket.io.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!--JS MAP -->
