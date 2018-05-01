@@ -24,28 +24,27 @@
         "FAIL_ACTIVE": "UPS! no se pudo activar el registro, intetentelo nuevamente."
     },
     "FIELDS": {
-        "FIRST_NAME": "Nombres",
-        "LAST_NAME": "Apellidos",
-        "CI": "Cédula",
-        "SEX": "Sexo",
-        "BORN": "Nacimiento",
-        "EMAIL": "Correo",
-        "TYPE_BLOOD": "Tipo de sangre",
-        "OCCUPATION": "Profesión",
-        "CITY": "Ciudad",
         "ADDRESS": "Dirección",
         "AGE": "Edad",
-        "STATE": "Estado",
+        "BORN": "Nacimiento",
+        "CI": "Cédula",
+        "CITY": "Ciudad",
+        "DEPARTMENT": "Departamento",
+        "EMAIL": "Correo",
+        "FIRST_NAME": "Nombres",
+        "LAST_NAME": "Apellidos",
+        "OCCUPATION": "Profesión",
+        "PASS": "Contraseña",
         "PERSON": "Persona",
         "PHONES": "Teléfonos",
-        "USER": "Usuario",
-        "PASS": "Contraseña",
         "ROLE": "Rol",
+        "STATE": "Estado",
         "SCHEDULE": "Horario",
-        "TYPE_SALARY": "Tipo de salario",
         "SALARY": "Salario",
-        "DEPARTMENT": "Departamento",
-        "SALARY": "Salario"
+        "SEX": "Sexo",
+        "TYPE_SALARY": "Tipo de salario",
+        "TYPE_BLOOD": "Tipo de sangre",
+        "USER": "Usuario"
     },
     "BUTTONS": {
         "CLEAN": "Limpiar",
@@ -55,7 +54,7 @@
         "UPDATE": "Editar",
         "ADD_PHONE": "Agregar teléfono",
         "RELOAD": "Recargar",
-        "SEARCH":"BUSCAR"
+        "SEARCH": "BUSCAR"
     },
     "PERSON_MODULE": {
         "TITLE_FORM": "Formulario de persona",
@@ -68,5 +67,11 @@
         "TITLE_FORM": "Formulario de usuario",
         "TITLE_GRID": "Lista de usuarios",
         "SEARCH_FIELD": "Nombres, apellidos, cédula, correo, usuario..."
+    },
+    "APPOINTMENT_MODULE": {
+        "TITLE_FORM": "Formulario de citas",
+        "TITLE_GRID": "Lista de citas",
+        "SEARCH_FIELD_PATIENT": "Paciente...",
+        "SEARCH_FIELD_MEDIC": "Médico..."
     }
 }

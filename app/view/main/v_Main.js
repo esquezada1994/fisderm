@@ -9,7 +9,8 @@ Ext.define('FisDerm.view.main.v_Main', {
         'FisDerm.view.main.MainModel',
         'FisDerm.view.main.ToggleComponent',
         'FisDerm.view.person.v_Person',
-        'FisDerm.view.staff.v_Staff'
+        'FisDerm.view.staff.v_Staff',
+        'FisDerm.view.appointment.v_Appointment'
     ],
     controller: 'main',
     viewModel: 'main',

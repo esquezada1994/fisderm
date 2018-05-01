@@ -11,7 +11,8 @@ Ext.application({
     stores: [
         's_Menu',
         'person.s_Person',
-        'staff.s_Staff'
+        'staff.s_Staff',
+        'appointment.s_Appointment'
     ],
     mainView: 'FisDerm.view.main.v_Main',
     launch: function () {
