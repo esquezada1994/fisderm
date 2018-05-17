@@ -259,7 +259,7 @@ Ext.define('FisDerm.view.person.v_Person', {
                                 ]
                             }, {
                                 xtype: 'togglebutton',
-                                fieldLabel: 'Habilitado',
+                                fieldLabel: APP_TEXT.FIELDS.ENABLED,
                                 name: 'disable',
                                 value: 0,
                                 labelWidth: 60

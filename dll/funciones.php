@@ -11,7 +11,7 @@ function RUN_SQL($mysqli, $sql) {
     } elseif ($stmt->affected_rows == 0) {
         return array('success' => false, "text" => "NO SE HAN DETECTADO CAMBIOS");
     } else {
-        return array('success' => false, "text" => "ERROR: " . $stmt->error);
+        return array('success' => false, "text" => "ERROR: " . $stmt->error, 'sql' => $sql);
     }
 }
 

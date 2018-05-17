@@ -54,6 +54,7 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
         <!-- JS CALENDAR-->
         <script src="vendor/fullcalendar-3.9.0/lib/moment.min.js" type="text/javascript"></script>
         <script src="vendor/fullcalendar-3.9.0/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="vendor/fullcalendar-3.9.0/locale-all.js" type="text/javascript"></script>
         <!-- JS SOCKET -->
         <script src="vendor/socket.io.js?<?php echo $VERSION ?>" type="text/javascript"></script>
         <!--JS MAP -->
@@ -62,8 +63,6 @@ if (isset($_SESSION["IS_LOGGED"]) && $_SESSION["IS_LOGGED"] === 0)
     </head>
     <body>
     <center>
-<!--        <img alt="karview" src="img/loaderModal.gif"/>-->
-        <br>
         <img alt="Sistema FisDerm" src="<?php echo $URL_IMG; ?>/sistema/logo.png" style=""/>
     </center>
 </body>

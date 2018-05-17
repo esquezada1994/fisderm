@@ -5,9 +5,38 @@ Ext.define('FisDerm.view.appointment.c_Appointment', {
     onView: function (module) {
         validateAccess(module);
         moduleAppointment = Ext.getCmp('moduleAppointment');
+        Ext.getStore('store_appointment').on('load', function(store, records){
+            console.log('llega');
+            setDataCalendar(records);
+        });
         Ext.getStore('store_appointment').load();
-        $('#calendar').fullCalendar({
-        
+        $('#calAppointment').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            eventConstraint: {
+                start: moment().format('YYYY-MM-DD'),
+                end: moment().add(3, 'M').format('YYYY-MM-DD')
+            },
+            defaultDate: moment().format('YYYY-MM-DD'),
+            locale: lang,
+            buttonIcons: true, // show the prev/next text
+            weekNumbers: true,
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            eventRender: function (eventObj, $el) {
+
+            },
+            eventClick: function (calEvent, jsEvent, view) {
+
+            },
+            eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+            },
+            eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+            }
         });
     },
     onSearch: function (btn, e) {
@@ -33,81 +62,16 @@ Ext.define('FisDerm.view.appointment.c_Appointment', {
         moduleAppointment.down('[name=idComboRole]').reset();
         Ext.getStore('store_appointment').load();
     },
-    onSelectGrid: function (thisObj, selected, eOpts) {
-        if (selected) {
-            var formCRUD = moduleAppointment.down('[name=formCRUD]');
-            formCRUD.down('[name=btnCreate]').disable();
-            formCRUD.down('[name=btnUpdate]').enable();
-            var roles = formCRUD.down('[name=idRoles]');
-            roles.getStore().load({
-                params: {
-                    required: selected.data.idRoles
-                },
-                callback: function (records) {
-                    if (records.length > 0) {
-                        roles.setValue(selected.data.idRoles);
-                        var idRoles = selected.data.idRoles.toString().split(',');
-                        for (var i in idRoles) {
-                            selectRoles.push({id: parseInt(idRoles[i]), new : false, disable: false});
-                        }
-                    }
-                }
-            });
-            var person = formCRUD.down('[name=idPerson]');
-            if (!inStore(person.getStore(), selected.data.idPerson, 'id')) {
-                person.getStore().load({
-                    params: {
-                        param: selected.data.idPerson
-                    },
-                    callback: function (records) {
-                        if (records.length > 0) {
-                            person.setValue(selected.data.idPerson);
-                        }
-                    }
-                });
+    oSelectTypeAppointment: function (combo, record) {
+        var time = Ext.Date.format(new Date('2018-05-05 ' + record.get('timeAppointment')), 'H:i');
+        moduleAppointment.down('[name=timeDuration]').setValue(time);
+        moduleAppointment.down('[name=cost]').setValue(record.get('cost'));
+    },
+    oSelectStaff: function (combo, record) {
+        if (record.get('typeSalary') === 3) {
+            if (record.get('salary') > 0) {
+                moduleAppointment.down('[name=cost]').setValue(record.get('salary'));
             }
-            var department = formCRUD.down('[name=idDepartment]');
-            if (!inStore(department.getStore(), selected.data.idDepartment, 'id')) {
-                department.getStore().load({
-                    params: {
-                        param: selected.data.idDepartment
-                    },
-                    callback: function (records) {
-                        if (records.length > 0) {
-                            department.setValue(selected.data.idDepartment);
-                        }
-                    }
-                });
-            }
-            var salary = formCRUD.down('[name=idTypeSalary]');
-            if (!inStore(person.getStore(), selected.data.idTypeSalary, 'id')) {
-                salary.getStore().load({
-                    params: {
-                        param: selected.data.idTypeSalary
-                    },
-                    callback: function (records) {
-                        if (records.length > 0) {
-                            salary.setValue(selected.data.idTypeSalary);
-                        }
-                    }
-                });
-            }
-            var schedule = formCRUD.down('[name=idSchedules]');
-            schedule.getStore().load({
-                params: {
-                    required: selected.data.idSchedules
-                },
-                callback: function (records) {
-                    if (records.length > 0) {
-                        schedule.setValue(selected.data.idSchedules);
-                        var idSchedules = selected.data.idSchedules.toString().split(',');
-                        for (var i in idSchedules) {
-                            selectSchedules.push({id: parseInt(idSchedules[i]), new : false, disable: false});
-                        }
-                    }
-                }
-            });
-            formCRUD.loadRecord(selected);
         }
     },
     onDeselectGrid: function () {
@@ -136,10 +100,15 @@ Ext.define('FisDerm.view.appointment.c_Appointment', {
         }
     }
 });
+function setDataCalendar(records) {
+    $('#calAppointment').fullCalendar('removeEventSources');
+    var events = [];
+    for (var i in records) {
+        events.push(records[i].data);
+    }
+    $('#calAppointment').fullCalendar('addEventSource', events);
+}
 
 function cleanModuleAppointment() {
-    var gridRead = moduleAppointment.down('[name=gridRead]');
-    var selected = gridRead.getSelection();
-    gridRead.getView().deselect(selected);
-    return selected;
+    moduleAppointment.down('[name=formCRUD]').reset();
 }

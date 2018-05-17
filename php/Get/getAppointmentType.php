@@ -12,7 +12,8 @@ $sql = "SELECT
             ID_TIPO_CITA as id,
             TIPO_CITA as text,
             TIEMPO_ESPERA as timeWait,
-            TIEMPO_CITA as timeAppointment
+            TIEMPO_CITA as timeAppointment,
+            COSTO as cost
         FROM
             $DB_NAME.tipo_cita
         WHERE

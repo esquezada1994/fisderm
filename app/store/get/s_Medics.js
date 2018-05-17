@@ -11,6 +11,8 @@ Ext.define('FisDerm.store.get.s_Medics', {
     },
     fields: [
         {name: 'id', type: 'int'},
-        'text'
+        'text',
+        {name: 'salary', type: 'int'},
+        {name: 'typeSalary', type: 'int'}
     ]
 });

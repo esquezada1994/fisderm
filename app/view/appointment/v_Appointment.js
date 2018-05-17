@@ -14,7 +14,12 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
         margin: 3
     },
     listeners: {
-        render: 'onView'
+        render: 'onView',
+        afterrender: function () {
+            setTimeout(function () {
+                $('#calAppointment').fullCalendar('render');
+            }, 300);
+        }
     },
     initComponent: function () {
         this.items = [
@@ -75,7 +80,10 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 queryParam: 'param',
                                 queryMode: 'remote',
                                 store: Ext.create('FisDerm.store.get.s_Appointment_Type'),
-                                minChars: 0
+                                minChars: 0,
+                                listeners: {
+                                    select: 'oSelectTypeAppointment'
+                                }
                             }, {
                                 fieldLabel: APP_TEXT.APPOINTMENT_MODULE.LABEL_MEDIC_PHYSICIAN,
                                 emptyText: APP_TEXT.APPOINTMENT_MODULE.LABEL_MEDIC_PHYSICIAN,
@@ -87,7 +95,10 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 queryParam: 'param',
                                 queryMode: 'remote',
                                 store: Ext.create('FisDerm.store.get.s_Medics'),
-                                minChars: 0
+                                minChars: 0,
+                                listeners: {
+                                    select: 'oSelectStaff'
+                                }
                             }, {
                                 fieldLabel: APP_TEXT.FIELDS.PATIENT,
                                 emptyText: APP_TEXT.FIELDS.PATIENT,
@@ -107,8 +118,8 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 layout: 'hbox',
                                 items: [
                                     {
-                                        fieldLabel: APP_TEXT.FIELDS.DATE_APPOINTMENT,
-                                        emptyText: APP_TEXT.FIELDS.DATE_APPOINTMENT,
+                                        fieldLabel: APP_TEXT.FIELDS.APPOINTMENT_DATE,
+                                        emptyText: APP_TEXT.FIELDS.APPOINTMENT_DATE,
                                         maskRe: /[0-9./-]/,
                                         name: 'dateAppointment',
                                         maxLength: '10',
@@ -118,15 +129,33 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                         format: 'd/m/Y',
                                         submitFormat: 'Y-m-d',
                                         submitValue: true
-                                    }, {
-                                        fieldLabel: APP_TEXT.FIELDS.TIME_APPOINTMENT,
-                                        emptyText: APP_TEXT.FIELDS.TIME_APPOINTMENT,
+                                    },
+                                    {
+                                        fieldLabel: APP_TEXT.FIELDS.APPOINTMENT_TIME,
+                                        emptyText: APP_TEXT.FIELDS.APPOINTMENT_TIME,
+                                        allowOnlyWhitespace: true,
                                         xtype: 'timefield',
                                         allowDecimal: true,
                                         margin: '5 0 0 5',
                                         name: 'timeAppointment',
                                         maxValue: '22:00',
-                                        minValue: '07:00'
+                                        minValue: '07:00',
+                                        format: 'H:i',
+                                        submitFormat: 'H:i:s',
+                                        increment: 30
+                                    }, {
+                                        fieldLabel: APP_TEXT.FIELDS.APPOINTMENT_DURATION,
+                                        emptyText: APP_TEXT.FIELDS.APPOINTMENT_DURATION,
+                                        allowOnlyWhitespace: true,
+                                        xtype: 'timefield',
+                                        allowDecimal: true,
+                                        margin: '5 0 0 5',
+                                        name: 'timeDuration',
+                                        increment: 30,
+                                        format: 'H:i',
+                                        submitFormat: 'H:i:s',
+                                        maxValue: '03:00',
+                                        minValue: '00:10'
                                     }
                                 ]
                             },
@@ -144,22 +173,50 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                         maxValue: 10000,
                                         minValue: 0
                                     }, {
+                                        disabled: true,
                                         fieldLabel: APP_TEXT.FIELDS.DISCOUNT,
                                         emptyText: APP_TEXT.FIELDS.DISCOUNT,
                                         xtype: 'numberfield',
                                         allowDecimal: true,
                                         margin: '5 0 0 5',
                                         name: 'discount',
+                                        value: 0,
                                         maxValue: 10000,
                                         minValue: 0
                                     }
                                 ]
+                            },
+                            {
+                                xtype: 'textarea',
+                                fieldLabel: APP_TEXT.FIELDS.DESCRIPTION,
+                                emptyText: APP_TEXT.FIELDS.DESCRIPTION,
+                                allowOnlyWhitespace: true,
+                                afterLabelTextTpl: '',
+                                name: 'description',
+                                allowBlank: true,
+                                maxLength: '250'
                             }, {
-                                xtype: 'togglebutton',
-                                fieldLabel: 'Habilitado',
-                                name: 'disable',
-                                value: 0,
-                                labelWidth: 60
+                                margin: 0,
+                                xtype: 'container',
+                                layout: 'hbox',
+                                items: [
+                                    {
+                                        xtype: 'togglebutton',
+                                        fieldLabel: APP_TEXT.FIELDS.ENABLED,
+                                        name: 'disable',
+                                        value: 0,
+                                        labelWidth: 60,
+                                        afterLabelTextTpl: ''
+                                    }, {
+                                        hidden: true,
+                                        xtype: 'togglebutton',
+                                        fieldLabel: APP_TEXT.FIELDS.DISCOUNT,
+                                        name: 'enableDiscount',
+                                        value: 0,
+                                        labelWidth: 60,
+                                        afterLabelTextTpl: ''
+                                    }
+                                ]
                             }
                         ],
                         buttons: [
@@ -171,7 +228,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 text: APP_TEXT.BUTTONS.CLEAN,
                                 iconAlign: 'top',
                                 handler: function () {
-                                    cleanModuleStaff();
+                                    cleanModuleAppointment();
                                 }
                             },
                             '->',
@@ -202,7 +259,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
             },
             {
                 flex: 2,
-                title: APP_TEXT.APPOINTMENT_MODULE.TITLE_GRID,
+                title: APP_TEXT.APPOINTMENT_MODULE.TITLE_CALENDAR,
                 plugins: 'responsive',
                 region: 'center',
                 layout: 'fit',
@@ -223,6 +280,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                 items: [
                     {
                         xtype: 'panel',
+                        bodyPadding: 5,
                         tbar: [
                             {
                                 flex: 3,
@@ -276,7 +334,7 @@ Ext.define('FisDerm.view.appointment.v_Appointment', {
                                 }
                             }
                         ],
-                        html: '<div id="calendar"></div>'
+                        html: '<div id="calAppointment"></div>'
                     }
                 ]
             }

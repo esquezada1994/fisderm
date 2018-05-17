@@ -32,7 +32,7 @@ if (isset($_SESSION["LOGGED"]) && $_SESSION["LOGGED"] == 1)
         <script src="js/login/login.js?<?php echo $VERSION ?>" type="text/javascript"></script><!--LOGIN-->
         <script src="dll/config.js" type="text/javascript"></script><!--LOGIN-->
     </head>
-    <body>
+    <body style="background-image: url('<?php echo $URL_IMG; ?>/sistema/logo.png');background-repeat:no-repeat;background-position: top center;">
         <div class="container">
             <div class="form-horizontal" id="frm-login">
                 <div class="row" style="margin-top:20%">

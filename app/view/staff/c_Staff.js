@@ -77,7 +77,7 @@ Ext.define('FisDerm.view.staff.c_Staff', {
                 });
             }
             var salary = formCRUD.down('[name=idTypeSalary]');
-            if (!inStore(person.getStore(), selected.data.idTypeSalary, 'id')) {
+            if (!inStore(salary.getStore(), selected.data.idTypeSalary, 'id')) {
                 salary.getStore().load({
                     params: {
                         param: selected.data.idTypeSalary
@@ -160,6 +160,7 @@ Ext.define('FisDerm.view.staff.c_Staff', {
 });
 
 function cleanModuleStaff() {
+    moduleStaff.down('[name=formCRUD]').reset();
     var gridRead = moduleStaff.down('[name=gridRead]');
     var selected = gridRead.getSelection();
     gridRead.getView().deselect(selected);

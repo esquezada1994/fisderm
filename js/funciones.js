@@ -23,7 +23,12 @@ function storeEmpty(store) {
 }
 
 function inStore(store, item, label) {
-    var exist = store.findRecord(label, item);
+    var exist = store.findExact(label, item);
+    if (exist !== -1) {
+        exist = store.data.items[exist];
+    } else {
+        exist = null;
+    }
     if (exist !== null) {
         return exist;
     } else {

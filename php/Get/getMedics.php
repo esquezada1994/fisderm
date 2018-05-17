@@ -9,21 +9,23 @@ if (!$mysqli = getConectionDb())
 extract($_GET);
 
 $sql = "SELECT 
-            p.ID_PERSONA AS id,
+            ps.ID_PERSONAL_SISTEMA AS id,
             CONCAT(p.NOMBRES, ' ', p.APELLIDOS) AS text,
             p.CEDULA AS ci,
             p.FECHA_NACIMIENTO AS fBorn,
             p.DIRECCION AS address,
             p.IMAGEN AS image,
             p.CORREO AS email,
-            p.TIPO_SANGRE AS idTypeBlood
+            p.TIPO_SANGRE AS idTypeBlood,
+            ps.SUELDO AS salary,
+            ps.ID_TIPO_SUELDO AS typeSalary
         FROM
             $DB_NAME.personas p
                 INNER JOIN
-            $DB_NAME.personal_sistema ps ON ps.ID_PERSONA = p.ID_PERSONA
+            $DB_NAME.personal_sistema ps ON ps.ID_PERSONA = p.ID_PERSONA AND ps.DESACTIVADO = 0
                 INNER JOIN
             $DB_NAME.roles_personal rp ON rp.ID_PERSONAL_SISTEMA = ps.ID_PERSONAL_SISTEMA
-                AND rp.ID_ROL IN (2 , 3)
+                AND rp.ID_ROL IN (2 , 3) AND rp.DESACTIVADO = 0
         WHERE
             p.DESACTIVADO = 0 ";
 

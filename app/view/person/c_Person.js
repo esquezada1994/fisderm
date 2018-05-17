@@ -171,6 +171,7 @@ Ext.define('FisDerm.view.person.c_Person', {
 });
 
 function cleanModulePerson() {
+    modulePerson.down('[name=formCRUD]').reset();
     var gridRead = modulePerson.down('[name=gridRead]');
     var selected = gridRead.getSelection();
     gridRead.getView().deselect(selected);
